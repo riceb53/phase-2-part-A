@@ -1,0 +1,16 @@
+<a href="/items/new">Add an Item</a> <BR><BR>
+
+
+
+<% @items.each do |item| %>
+  <a href="/items/<%=item.id %>"><%= item.title %></a> <BR><BR>
+    <!-- here's the session id <%= session[:user_id] %> -->
+    <!-- here's the item.user_id <%= item.user_id %> -->
+    <% if item.user_id == session[:user_id] %>
+    <a href="/items/<%=item.id %>/edit"> Since you created this item, you can edit it.</a>
+    <form action="/items/<%=item.id %>/delete" method 'post'>
+      <input type="hidden" name="_method" value="delete">
+      <input type="submit" value='DELETE'>
+    </form>
+    <% end %>
+  <% end %>
